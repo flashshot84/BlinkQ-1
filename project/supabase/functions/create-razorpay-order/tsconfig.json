@@ -1,0 +1,23 @@
+// supabase/functions/create-razorpay-order/tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    // --- CRUCIAL FIX HERE: Use standard WebWorker and ESNext lib types ---
+    "lib": [
+      "WebWorker",   // Provides globals like Response, Request, btoa, console, fetch
+      "ESNext"       // Keeps modern JavaScript features
+    ],
+    // --- End CRUCIAL FIX ---
+
+    "types": ["deno"], // This is still needed to resolve the 'deno' module (e.g., Deno.env.get)
+    "isolatedModules": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true, // We don't want TypeScript to emit JS files here
+    "moduleResolution": "bundler" // Use "bundler" or "node" based on your project's main tsconfig.
+  },
+  "include": ["./index.ts"] // Only include the function's entry file
+}
